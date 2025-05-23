@@ -10,6 +10,7 @@ def print_board(board):
             print("---------------")
 
         print()
+
 def checktie(board):
     # Check if the board is full
     for row in board:
@@ -105,6 +106,7 @@ def game():
                 except ValueError:
                         print("Invalid input, numbers only")
                         continue
+                
             if(wincondition(board)):
                 print_board(board)
                 print("User 2 wins")
@@ -114,12 +116,20 @@ def game():
                 gameover=True
             else:
                 gameover=False
+
     print("Thanks for Playing!!!")
-    print("Wanna play again? (y/n)")
-    if input()=="y":
-        game()
-    else:
-        print("Goodbye")
+    while True:
+        print("Wanna play again? (y/n)")
+        playagain=input()
+        if playagain=="y":
+            game()
+        elif playagain=='n':
+            print("Goodbye")
+            break
+        else:
+            print("Invalid input, please enter y or n")
+            continue
+
 def main():
     print("Welcome to Tic Tac Toe")
     print("You are User 1 and you will be X")
