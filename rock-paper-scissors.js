@@ -8,8 +8,45 @@ document.querySelector(
   ".js-scores"
 ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 
+document.body.addEventListener("keydown", (event) => {
+  if (event.key === "r") {
+    playgame("rock");
+  } else if (event.key === "p") {
+    playgame("paper");
+  } else if (event.key === "s") {
+    playgame("scissors");
+  }
+});
+
 let result = "";
 let computer = "";
+let isAutoPlaying = false;
+let intervalid;
+
+function autoplay() {
+  if (!isAutoPlaying) {
+    intervalid = setInterval(() => {
+      const playerMove = computerrandom();
+      playgame(playerMove);
+    }, 1000);
+    isAutoPlaying = true;
+  } else {
+    clearInterval(intervalid);
+    isAutoPlaying = false;
+  }
+}
+
+document.querySelector(".js-rock-button").addEventListener("click", () => {
+  playgame("rock");
+});
+
+document.querySelector(".js-paper-button").addEventListener("click", () => {
+  playgame("paper");
+});
+document.querySelector(".js-scissors-button").addEventListener("click", () => {
+  playgame("scissors");
+});
+
 function playgame(playerMove) {
   computer = computerrandom();
   result = "";
